@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Philipp
+ * @author Philipp 
  */
 public class MoveTest {
     public static void main(String[] args){

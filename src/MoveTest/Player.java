@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Philipp
+ * @author Philipp 
  */
 public class Player {
     private Rectangle bounding;
