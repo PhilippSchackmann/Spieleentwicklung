@@ -2,6 +2,11 @@
 package MoveTest;
 
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -13,10 +18,15 @@ public class Player {
     private float f_posy;
     private int worldsize_x;
     private int worldsize_y;
+    private BufferedImage look;
     
     
-    public Player( int x, int y, int size, int worldsize_x, int worldsize_y){
-        bounding = new Rectangle(x, y, size, size);
+    public Player( int x, int y,  int worldsize_x, int worldsize_y){
+        try {
+            look = ImageIO.read(getClass().getClassLoader().getResourceAsStream("gfx/raumschiffchen"));
+        } catch (IOException e) {e.printStackTrace();}
+         
+        bounding = new Rectangle(x, y, look.getWidth(), look.getHeight());
         f_posx = x;
         f_posy = y;
         /*
@@ -60,5 +70,8 @@ public class Player {
     
     public Rectangle getBounding(){
         return bounding;
+    }
+    public BufferedImage getLook(){
+        return look;
     }
 }

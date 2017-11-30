@@ -19,6 +19,7 @@ public class Frame extends JFrame {   //erbt von JFrame
     private Screen screen;  //Attribut
     
     final Player player;  // Player wird gespeichert
+    final Background bg;
     
     
     private boolean key_up = false;  
@@ -32,13 +33,14 @@ public class Frame extends JFrame {   //erbt von JFrame
     * Boolean steht für
     */  
     
-    public Frame(Player player){  // Constructor
+    public Frame(Player player, Background bg){  // Constructor
         super("Mein erstes Spiel"); //Name des Fensters
         screen = new Screen();
-        screen.setBounds(0, 0, 800, 600); // Größe des Fensters
+        screen.setBounds(0, 0, 1920, 1080); // Größe des Fensters
         add(screen);
         addKeyListener(new KeyHandler());  //
         this.player = player;
+        this.bg = bg;
     } 
     
     public boolean getUp(){
@@ -70,7 +72,9 @@ public class Frame extends JFrame {   //erbt von JFrame
           
             super.paintComponent(g); 
             g.setColor(Color.GREEN); //Farbe des Spielers festlegen
-            g.fillRect(player.getBounding().x, player.getBounding().y, player.getBounding().width, player.getBounding().height);
+            g.drawImage(bg.getLook(),bg.getX(), 0, null);
+            g.drawImage(bg.getLook(),bg.getX()+bg.getLook().getWidth(), 0, null);
+            g.drawImage(player.getLook(), player.getBounding().x, player.getBounding().y, null);
             /*
             * Hier wird der Spieler "erstellt" .
             *Dazu werden die Informationen aus der Playerklasse abgerufen.
@@ -85,6 +89,7 @@ public class Frame extends JFrame {   //erbt von JFrame
             if(e.getKeyCode() == KeyEvent.VK_S)key_down = true;
             if(e.getKeyCode() == KeyEvent.VK_A)key_left = true;
             if(e.getKeyCode() == KeyEvent.VK_D)key_right = true;
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE) System.exit(0);
             /*
             * Abfrage: ist die jeweilige Taste gedrückt?
             * Die Taste W ist z.B.: VK_W  
